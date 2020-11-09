@@ -20,7 +20,6 @@ public class ValidateActivity extends AppCompatActivity {
     private static final String TAG = "ValidateActivity";
     Button validate;
     EditText confirmationCode;
-    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +59,5 @@ public class ValidateActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         });
-
-
-//
-//        btn = findViewById(R.id.button_logout_eawriuhfgvbuyergfveury);
-//
-//        btn.setOnClickListener(v -> {
-//            CognitoSettings user = new CognitoSettings(getApplicationContext());
-//            CognitoUser cognitoUser = user.getUserPool().getUser("cognitochan");
-//            cognitoUser.globalSignOut();
-//        });
-
-
     }
 }

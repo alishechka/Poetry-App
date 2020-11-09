@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login.ValidateActivity">
-    <Button
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/button_logout_eawriuhfgvbuyergfveury"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="log"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="110dp" />
+<!--    <Button-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:id="@+id/button_logout_eawriuhfgvbuyergfveury"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="log"-->
+<!--        tools:layout_editor_absoluteX="141dp"-->
+<!--        tools:layout_editor_absoluteY="110dp" />-->
     <EditText
         android:id="@+id/validationCode_validate"
         android:layout_width="wrap_content"

@@ -3,14 +3,12 @@ package com.example.cognito.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoDevice;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserSession;
@@ -20,6 +18,7 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.Chal
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.MultiFactorAuthenticationContinuation;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
 import com.example.cognito.MainActivity;
+import com.example.cognito.PoetryServiceActivity;
 import com.example.cognito.R;
 
 public class SignInActivity extends AppCompatActivity {
@@ -27,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button signIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +97,7 @@ public class SignInActivity extends AppCompatActivity {
             CognitoUser cognitoUser = user.getUserPool().getUser(String.valueOf(username.getText()));
             cognitoUser.getSessionInBackground(authenticationHandler);
 
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, PoetryServiceActivity.class);
             startActivity(intent);
         });
     }

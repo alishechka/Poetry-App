@@ -52,6 +52,11 @@ dependencies {
     //View Model
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
 
+    //bottom navigation
+    implementation 'com.android.support:design:28.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
+
+
 //    //For AWSMobileClient only: https://haverchuck.github.io/docs/android/authentication
 //    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.19.0'
 

@@ -30,14 +30,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textMain = findViewById(R.id.text_main);
-        buttonMain = findViewById(R.id.button_main);
+//        textMain = findViewById(R.id.text_main);
+//        buttonMain = findViewById(R.id.button_main);
         btnLogin = findViewById(R.id.button_main_login);
         btnSignup = findViewById(R.id.button_main_signup);
         btnLogout = findViewById(R.id.button_main_logout);
 
         btnLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+            Intent intent = new Intent(MainActivity.this, PoetryServiceActivity.class);
             startActivity(intent);
         });
         btnSignup.setOnClickListener(v -> {
@@ -45,20 +45,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        buttonMain.setOnClickListener(v ->
-                viewModel.getPoemData()
-        );
-
-        viewModel.poem().observe(this, randomPoem -> {
-            textMain.setText(randomPoem.getAuthor());
-            Log.i(TAG, "SUCCESS: " + randomPoem);
-        });
-        viewModel.error().observe(this, error -> {
-            textMain.setText(error);
-            Log.i(TAG, "ERROR: " + error);
-        });
-        logout();
+//        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+//        buttonMain.setOnClickListener(v ->
+//                viewModel.getPoemData()
+//        );
+//
+//        viewModel.poem().observe(this, randomPoem -> {
+//            textMain.setText(randomPoem.getAuthor());
+//            Log.i(TAG, "SUCCESS: " + randomPoem);
+//        });
+//        viewModel.error().observe(this, error -> {
+//            textMain.setText(error);
+//            Log.i(TAG, "ERROR: " + error);
+//        });
+//        logout();
     }
 
     public void logout() {
@@ -73,27 +73,28 @@ public class MainActivity extends AppCompatActivity {
             CognitoSettings user = new CognitoSettings(getApplicationContext());
             CognitoUser cognitoUser = user.getUserPool().getUser("cognitochan");
             Log.i(TAG, "onCreate: " + cognitoUser.getUserId());
-            Log.i(TAG, "logout: "+cognitoUser.getUserPoolId());
+            Log.i(TAG, "logout: " + cognitoUser.getUserPoolId());
             cognitoUser.signOut();
-            cognitoUser.globalSignOut(new GenericHandler() {
-                @Override
-                public void onSuccess() {
-                    Log.i(TAG, "onSuccess: LOGGED OUT");
-//                    Log.i(TAG, "onSuccess: " + sCredProvider.getIdentityId());
-//                    sCredProvider.clear();
-//                    Log.i(TAG, "onSuccess: " + sCredProvider.getIdentityId());
-                }
-
-                @Override
-                public void onFailure(Exception exception) {
-                    Log.i(TAG, "onFailure: failed to log out globally");
-                    Log.i(TAG, "onFailure: " + exception.getLocalizedMessage());
-                    Log.i(TAG, "onFailure: " + exception.getMessage());
-                    Log.i(TAG, "onFailure: " + exception.getCause());
-//                    Log.i(TAG, "FAILED: " + sCredProvider.getIdentityId());
-                }
-            });
-            Log.i(TAG, "logout: "+cognitoUser.getUserPoolId());
+            Log.i(TAG, "logout: SIGNED OUT");
+//            cognitoUser.globalSignOut(new GenericHandler() {
+//                @Override
+//                public void onSuccess() {
+//                    Log.i(TAG, "onSuccess: LOGGED OUT");
+////                    Log.i(TAG, "onSuccess: " + sCredProvider.getIdentityId());
+////                    sCredProvider.clear();
+////                    Log.i(TAG, "onSuccess: " + sCredProvider.getIdentityId());
+//                }
+//
+//                @Override
+//                public void onFailure(Exception exception) {
+//                    Log.i(TAG, "onFailure: failed to log out globally");
+//                    Log.i(TAG, "onFailure: " + exception.getLocalizedMessage());
+//                    Log.i(TAG, "onFailure: " + exception.getMessage());
+//                    Log.i(TAG, "onFailure: " + exception.getCause());
+////                    Log.i(TAG, "FAILED: " + sCredProvider.getIdentityId());
+//                }
+//            });
+            Log.i(TAG, "logout: " + cognitoUser.getUserPoolId());
             Log.i(TAG, "onCreate: " + cognitoUser.getUserId());
         });
     }
