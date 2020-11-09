@@ -56,6 +56,9 @@ dependencies {
     implementation 'com.android.support:design:28.1.0'
     implementation 'com.google.android.material:material:1.2.1'
 
+    // RecyclerView
+    def recyclerview_version = "1.1.0-beta03"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
 //    //For AWSMobileClient only: https://haverchuck.github.io/docs/android/authentication
 //    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.19.0'
