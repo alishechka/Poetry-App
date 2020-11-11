@@ -3,16 +3,13 @@ package com.example.cognito;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
-import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GenericHandler;
 import com.example.cognito.login.CognitoSettings;
 import com.example.cognito.login.SignInActivity;
 import com.example.cognito.login.SignUpActivity;
@@ -59,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 //            Log.i(TAG, "ERROR: " + error);
 //        });
 //        logout();
+
+
     }
 
     public void logout() {
@@ -98,5 +97,4 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "onCreate: " + cognitoUser.getUserId());
         });
     }
-
 }

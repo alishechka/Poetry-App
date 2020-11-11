@@ -97,6 +97,7 @@ public class SignInActivity extends AppCompatActivity {
             CognitoUser cognitoUser = user.getUserPool().getUser(String.valueOf(username.getText()));
             cognitoUser.getSessionInBackground(authenticationHandler);
 
+            //Intent doesnt care if login credentials are correct ...wtf
             Intent intent = new Intent(this, PoetryServiceActivity.class);
             startActivity(intent);
         });
