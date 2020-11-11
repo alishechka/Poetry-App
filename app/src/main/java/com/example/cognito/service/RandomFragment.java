@@ -12,15 +12,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cognito.MainViewModel;
 import com.example.cognito.databinding.FragmentRandomBinding;
+import com.example.cognito.databinding.PoemLayoutBinding;
 
 public class RandomFragment extends Fragment {
     private MainViewModel viewModel;
     private FragmentRandomBinding binding;
+    private PoemLayoutBinding poemBinding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentRandomBinding.inflate(inflater, container, false);
+        poemBinding=PoemLayoutBinding.bind(binding.getRoot());
         return binding.getRoot();
     }
 
@@ -29,19 +32,20 @@ public class RandomFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+
         binding.randomRefresh.setOnRefreshListener(() -> {
             viewModel.getPoemData();
             binding.randomRefresh.setRefreshing(false);
         });
 
         viewModel.poem().observe(this, randomPoem -> {
-            binding.randomTitle.setText(randomPoem.getTitle());
-            binding.randomAuthor.setText(randomPoem.getAuthor());
+            poemBinding.randomTitle.setText(randomPoem.getTitle());
+            poemBinding.randomAuthor.setText(randomPoem.getAuthor());
             StringBuilder builder = new StringBuilder();
             for (String details : randomPoem.getLines()) {
                 builder.append(details + "\n");
             }
-            binding.randomPoem.setText(builder.toString());
+            poemBinding.randomPoem.setText(builder.toString());
         });
 
     }
