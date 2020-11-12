@@ -1,13 +1,21 @@
 package com.example.cognito.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.cognito.daoconverters.StringListConverter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import static com.example.cognito.common.Constants.POEM_TABLE_NAME;
+
+@Entity(tableName = POEM_TABLE_NAME)
 public class PoemModel {
+    @PrimaryKey
     @SerializedName("title")
     @Expose
     @NonNull
@@ -17,6 +25,7 @@ public class PoemModel {
     private String author;
     @SerializedName("lines")
     @Expose
+    @TypeConverters(StringListConverter.class)
     private List<String> lines = null;
     @SerializedName("linecount")
     @Expose

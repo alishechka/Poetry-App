@@ -55,4 +55,5 @@ public class RandomFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

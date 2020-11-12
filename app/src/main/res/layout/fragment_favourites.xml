@@ -6,9 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@android:color/holo_green_dark">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favourites_recycler_view"
@@ -18,6 +15,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/favourites_layout_item" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

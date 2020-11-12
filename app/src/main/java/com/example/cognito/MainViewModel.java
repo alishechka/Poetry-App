@@ -1,5 +1,7 @@
 package com.example.cognito;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -33,6 +35,8 @@ public class MainViewModel extends ViewModel {
                     @Override
                     public void onSuccess(PoemModel poemModels) {
                         _poem.setValue(poemModels);
+                        repo.addPoemToDb(poemModels);
+                        Log.d("ROOMDB", "onSuccess: " + poemModels.getTitle());
                     }
 
                     @Override
@@ -40,6 +44,7 @@ public class MainViewModel extends ViewModel {
                         _error.setValue(e.getLocalizedMessage());
                     }
                 })
+
         );
     }
 
