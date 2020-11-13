@@ -37,8 +37,21 @@
         android:gravity="center"
         android:hint="@string/large_sample_poem"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_to_favs"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/random_author" />
+
+    <Button
+        android:id="@+id/add_to_favs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="fav it moss"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/random_poem"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+
 </merge>

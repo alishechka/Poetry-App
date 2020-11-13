@@ -23,7 +23,7 @@ public class RandomFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentRandomBinding.inflate(inflater, container, false);
-        poemBinding=PoemLayoutBinding.bind(binding.getRoot());
+        poemBinding = PoemLayoutBinding.bind(binding.getRoot());
         return binding.getRoot();
     }
 
@@ -36,6 +36,7 @@ public class RandomFragment extends Fragment {
         binding.randomRefresh.setOnRefreshListener(() -> {
             viewModel.getPoemData();
             binding.randomRefresh.setRefreshing(false);
+
         });
 
         viewModel.poem().observe(this, randomPoem -> {
@@ -46,6 +47,12 @@ public class RandomFragment extends Fragment {
                 builder.append(details + "\n");
             }
             poemBinding.randomPoem.setText(builder.toString());
+
+            //add to favs
+            poemBinding.addToFavs.setOnClickListener(v -> {
+                        viewModel.addToFavourites(randomPoem.getTitle());
+                    }
+            );
         });
 
     }
