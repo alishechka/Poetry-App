@@ -48,8 +48,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
     //RxJava
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 
     //View Model
@@ -73,8 +73,15 @@ dependencies {
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
     //Room DB
-    def room_version = "2.2.5"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-runtime:2.2.5"
+    annotationProcessor "androidx.room:room-compiler:2.1.0-alpha04"
+    /*
+        dont update the annotation as you will get an erro saying "error: cannot find symbol" for your rx stuff
+
+     */
+    implementation "android.arch.persistence.room:rxjava2:1.1.1"
+
+    //Timber for logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 }

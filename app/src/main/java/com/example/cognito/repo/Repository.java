@@ -1,16 +1,19 @@
 package com.example.cognito.repo;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.cognito.App;
-import com.example.cognito.dao.PoemDao;
 import com.example.cognito.dao.RandomPoemDatabase;
 import com.example.cognito.model.FavouritesBody;
 import com.example.cognito.model.PoemModel;
 import com.example.cognito.network.RetrofitInstance;
 
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 import static com.example.cognito.common.Constants.ACCESS_TOKEN;
 
@@ -28,10 +31,15 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Completable addToFavouritesList(String poemTitle) {
-        FavouritesBody body=new FavouritesBody(poemTitle);
+    public Single<PoemModel> getPoemFromDb(String title) {
+        return RandomPoemDatabase.getInstance(App.getAppContext()).randomPoemDao().getPoem(title)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
-        return RetrofitInstance.service.putFavourite("Bearer " + ACCESS_TOKEN,body)
+    public Completable addToFavouritesList(String poemTitle) {
+        FavouritesBody body = new FavouritesBody(poemTitle);
+        return RetrofitInstance.service.putFavourite("Bearer " + ACCESS_TOKEN, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

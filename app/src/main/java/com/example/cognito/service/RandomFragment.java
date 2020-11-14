@@ -36,7 +36,6 @@ public class RandomFragment extends Fragment {
         binding.randomRefresh.setOnRefreshListener(() -> {
             viewModel.getPoemData();
             binding.randomRefresh.setRefreshing(false);
-
         });
 
         viewModel.poem().observe(this, randomPoem -> {
@@ -47,12 +46,15 @@ public class RandomFragment extends Fragment {
                 builder.append(details + "\n");
             }
             poemBinding.randomPoem.setText(builder.toString());
-
             //add to favs
             poemBinding.addToFavs.setOnClickListener(v -> {
                         viewModel.addToFavourites(randomPoem.getTitle());
                     }
             );
+            viewModel.addToRoomDB(randomPoem);
+            poemBinding.addToRoomdb.setOnClickListener(v -> {
+                viewModel.getPoemByTitle(randomPoem.getTitle());
+            });
         });
 
     }

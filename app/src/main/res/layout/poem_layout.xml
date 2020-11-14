@@ -50,6 +50,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/random_poem"
+        app:layout_constraintBottom_toTopOf="@id/add_to_roomdb"
+
+        />
+
+    <Button
+        android:id="@+id/add_to_roomdb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add_to_roomdb"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_to_favs"
         app:layout_constraintBottom_toBottomOf="parent"
 
         />

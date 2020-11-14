@@ -4,22 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.example.cognito.login.CognitoSettings;
 import com.example.cognito.login.SignInActivity;
 import com.example.cognito.login.SignUpActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textMain;
-    private Button buttonMain, btnLogin, btnSignup, btnLogout;
-    private MainViewModel viewModel;
-    private CognitoCachingCredentialsProvider sCredProvider;
-
+    private Button btnLogin, btnSignup, btnLogout;
     private static final String TAG = "MainActivity";
 
     @Override
@@ -27,14 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        textMain = findViewById(R.id.text_main);
-//        buttonMain = findViewById(R.id.button_main);
         btnLogin = findViewById(R.id.button_main_login);
         btnSignup = findViewById(R.id.button_main_signup);
         btnLogout = findViewById(R.id.button_main_logout);
 
         btnLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PoetryServiceActivity.class);
+            Intent intent = new Intent(MainActivity.this, SignInActivity.class);
             startActivity(intent);
         });
         btnSignup.setOnClickListener(v -> {
@@ -56,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
 //            Log.i(TAG, "ERROR: " + error);
 //        });
 //        logout();
-
-
     }
 
     public void logout() {

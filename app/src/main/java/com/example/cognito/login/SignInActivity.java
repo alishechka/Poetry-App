@@ -17,9 +17,10 @@ import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.Auth
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.ChallengeContinuation;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.continuations.MultiFactorAuthenticationContinuation;
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.AuthenticationHandler;
-import com.example.cognito.MainActivity;
 import com.example.cognito.PoetryServiceActivity;
 import com.example.cognito.R;
+
+import static com.example.cognito.common.Constants.ACCESS_TOKEN;
 
 public class SignInActivity extends AppCompatActivity {
     private static final String TAG = "SignIn";
@@ -50,10 +51,8 @@ public class SignInActivity extends AppCompatActivity {
                     Log.d(TAG, "onSuccess: TOKEN refresh " + userSession.getRefreshToken().getToken());
 
                     Toast.makeText(SignInActivity.this, "login successfully", Toast.LENGTH_SHORT).show();
-//                    CognitoSettings user2 = new CognitoSettings(getApplicationContext());
-//                    CognitoUser i = user2.getUserPool().getUser(userSession.getUsername());
-//                    sCredProvider=new CognitoCachingCredentialsProvider(SignInActivity.this,
-//                            i.getUserId(),i.getUserPoolId(),null,null,user2.getCognitoRegion());
+                    ACCESS_TOKEN = userSession.getAccessToken().getJWTToken();
+                    Log.d(TAG, "onSuccess: access token set for " + userSession.getUsername());
 
                 }
 
@@ -61,10 +60,8 @@ public class SignInActivity extends AppCompatActivity {
                 public void getAuthenticationDetails(AuthenticationContinuation authenticationContinuation, String userId) {
                     // The API needs user sign-in credentials to continue
                     AuthenticationDetails authenticationDetails = new AuthenticationDetails(userId, String.valueOf(password.getText()), null);
-
                     // Pass the user sign-in credentials to the continuation
                     authenticationContinuation.setAuthenticationDetails(authenticationDetails);
-
                     // Allow the sign-in to continue
                     authenticationContinuation.continueTask();
 

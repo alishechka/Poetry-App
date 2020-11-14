@@ -21,7 +21,9 @@ public class PoetryServiceActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-
+        if (savedInstanceState==null){
+            bottomNavigationView.setSelectedItemId(R.id.nav_random);
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
