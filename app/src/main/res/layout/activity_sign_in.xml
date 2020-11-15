@@ -7,6 +7,7 @@
     tools:context=".login.SignInActivity">
 
     <EditText
+        android:text="cognitochan"
         android:id="@+id/username_singin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:text="/Cognito2020"
         android:id="@+id/password_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

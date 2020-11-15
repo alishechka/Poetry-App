@@ -13,11 +13,17 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.cognito.MainViewModel;
 import com.example.cognito.databinding.FragmentRandomBinding;
 import com.example.cognito.databinding.PoemLayoutBinding;
+import com.example.cognito.model.PoemModel;
+
+import java.io.Serializable;
+
+import timber.log.Timber;
 
 public class RandomFragment extends Fragment {
     private MainViewModel viewModel;
     private FragmentRandomBinding binding;
     private PoemLayoutBinding poemBinding;
+    private PoemModel savedTempModel;
 
     @Nullable
     @Override
@@ -32,6 +38,17 @@ public class RandomFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+//        Timber.d("XXXXXXXXXXX %s", savedTempModel.getTitle());
+//
+//        if (savedTempModel!=null){
+//            poemBinding.randomTitle.setText(savedTempModel.getTitle());
+//            poemBinding.randomAuthor.setText(savedTempModel.getAuthor());
+//            StringBuilder builder = new StringBuilder();
+//            for (String details : savedTempModel.getLines()) {
+//                builder.append(details + "\n");
+//            }
+//            poemBinding.randomPoem.setText(builder.toString());
+//        }
 
         binding.randomRefresh.setOnRefreshListener(() -> {
             viewModel.getPoemData();
@@ -39,6 +56,8 @@ public class RandomFragment extends Fragment {
         });
 
         viewModel.poem().observe(this, randomPoem -> {
+//            savedTempModel=randomPoem;
+//            Timber.d("XXXXXXXXXXX %s", savedTempModel.getTitle());
             poemBinding.randomTitle.setText(randomPoem.getTitle());
             poemBinding.randomAuthor.setText(randomPoem.getAuthor());
             StringBuilder builder = new StringBuilder();
@@ -58,6 +77,23 @@ public class RandomFragment extends Fragment {
         });
 
     }
+
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putSerializable("model", (Serializable) savedTempModel);
+//    }
+//
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        if (savedInstanceState != null) {
+//            savedTempModel = (PoemModel) savedInstanceState.getSerializable("model");
+//            Timber.d(savedTempModel.getTitle());
+//
+//        }
+//
+//    }
 
     @Override
     public void onDestroyView() {

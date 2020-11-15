@@ -10,9 +10,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.cognito.model.PoemModel;
 import com.example.cognito.repo.Repository;
 
-import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Single;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
