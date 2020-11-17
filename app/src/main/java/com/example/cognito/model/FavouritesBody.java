@@ -1,5 +1,5 @@
 package com.example.cognito.model;
-
+//for api call body
 public class FavouritesBody {
     private String title;
 

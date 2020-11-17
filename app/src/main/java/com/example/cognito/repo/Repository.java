@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.cognito.App;
 import com.example.cognito.dao.RandomPoemDatabase;
+import com.example.cognito.model.Favourites;
 import com.example.cognito.model.FavouritesBody;
 import com.example.cognito.model.PoemModel;
 import com.example.cognito.network.RetrofitInstance;
@@ -40,6 +41,12 @@ public class Repository {
     public Completable addToFavouritesList(String poemTitle) {
         FavouritesBody body = new FavouritesBody(poemTitle);
         return RetrofitInstance.service.putFavourite("Bearer " + ACCESS_TOKEN, body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Single<Favourites> getFavouritesList() {
+        return RetrofitInstance.service.getFavourites("Bearer " + ACCESS_TOKEN)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

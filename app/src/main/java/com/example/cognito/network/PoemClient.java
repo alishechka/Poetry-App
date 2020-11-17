@@ -1,5 +1,6 @@
 package com.example.cognito.network;
 
+import com.example.cognito.model.Favourites;
 import com.example.cognito.model.FavouritesBody;
 import com.example.cognito.model.PoemModel;
 
@@ -16,4 +17,7 @@ public interface PoemClient {
 
     @POST("favourites")
     Completable putFavourite(@Header("Authorization") String token, @Body FavouritesBody poemTitle);
+
+    @GET("favourites")
+    Single<Favourites>getFavourites(@Header("Authorization") String token);
 }
