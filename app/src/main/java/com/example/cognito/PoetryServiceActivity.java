@@ -1,11 +1,9 @@
 package com.example.cognito;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.cognito.service.FavouriteFragment;
 import com.example.cognito.service.RandomFragment;
@@ -13,17 +11,30 @@ import com.example.cognito.service.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PoetryServiceActivity extends AppCompatActivity {
+    private RandomFragment randomFragment;
+    private final String RANDOM_FRAGMENT = "myRandomFragmentTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poetry_service);
 
+
+//        if (savedInstanceState == null) {
+//            bottomNavigationView.setSelectedItemId(R.id.nav_random);
+//        }
+        if (savedInstanceState != null) {
+            randomFragment = (RandomFragment) getSupportFragmentManager().findFragmentByTag(RANDOM_FRAGMENT);
+//            if (randomFragment == null) {
+//                randomFragment = new RandomFragment();
+//            }
+
+        } else if (randomFragment == null) {
+            randomFragment = new RandomFragment();
+        }
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-        if (savedInstanceState==null){
-            bottomNavigationView.setSelectedItemId(R.id.nav_random);
-        }
+        bottomNavigationView.setSelectedItemId(R.id.nav_random);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -31,7 +42,12 @@ public class PoetryServiceActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.nav_random:
-                        selectedFragment = new RandomFragment();
+                        swapFragment(randomFragment, item.getItemId(), RANDOM_FRAGMENT);
+////                        selectedFragment = new RandomFragment();
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .add(R.id.fragment_container, randomFragment, RANDOM_FRAGMENT)
+//                                .commit();
                         break;
                     case R.id.nav_favourites:
                         selectedFragment = new FavouriteFragment();
@@ -40,9 +56,25 @@ public class PoetryServiceActivity extends AppCompatActivity {
                         selectedFragment = new SearchFragment();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        selectedFragment).commit();
+                if (selectedFragment != null) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, selectedFragment)
+                            .commit();
+                }
                 return true;
             };
 
+    private void swapFragment(Fragment fragment, int itemId, String tag) {
+        if (getSupportFragmentManager().findFragmentByTag(tag) == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment, tag)
+                    .commit();
+        }
+    }
+
 }
+
+
+
