@@ -1,5 +1,6 @@
 package com.example.cognito.service;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,16 +9,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cognito.FavouritesAdapter;
 import com.example.cognito.MainViewModel;
 import com.example.cognito.OnClickedListener;
+import com.example.cognito.R;
 import com.example.cognito.databinding.FragmentFavouritesBinding;
 import com.example.cognito.model.Favourites;
 
 import timber.log.Timber;
+
+import static com.example.cognito.common.Constants.POEM_TITLE;
 
 public class FavouriteFragment extends Fragment implements OnClickedListener {
     private MainViewModel viewModel;
@@ -54,5 +60,21 @@ public class FavouriteFragment extends Fragment implements OnClickedListener {
     @Override
     public void onItemClicked(String title) {
         Timber.d(title);
+//        Intent intent = new Intent(this.getContext(), DisplaySinglePoemFragment.class);
+//        intent.putExtra(POEM_TITLE, title);
+//        startActivity(intent);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(POEM_TITLE, title);
+
+        Fragment frag = new DisplaySinglePoemFragment();
+        frag.setArguments(bundle);
+        FragmentManager ft = getFragmentManager();
+        ft.beginTransaction()
+                .replace(R.id.fragment_container, frag)
+                .addToBackStack("tag")
+                .commit();
+
+
     }
 }

@@ -15,8 +15,6 @@ import com.example.cognito.databinding.FragmentRandomBinding;
 import com.example.cognito.databinding.PoemLayoutBinding;
 import com.example.cognito.model.PoemModel;
 
-import timber.log.Timber;
-
 public class RandomFragment extends Fragment {
     private MainViewModel viewModel;
     private FragmentRandomBinding binding;
@@ -38,31 +36,31 @@ public class RandomFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         if (currentPoemModel != null) {
-            poemBinding.randomTitle.setText(currentPoemModel.getTitle());
-            poemBinding.randomAuthor.setText(currentPoemModel.getAuthor());
+            poemBinding.poemTitle.setText(currentPoemModel.getTitle());
+            poemBinding.poemAuthor.setText(currentPoemModel.getAuthor());
             StringBuilder builder = new StringBuilder();
             for (String details : currentPoemModel.getLines()) {
                 builder.append(details + "\n");
             }
-            poemBinding.randomPoem.setText(builder.toString());
+            poemBinding.poemPoem.setText(builder.toString());
         }
 
         binding.randomRefresh.setOnRefreshListener(() -> {
-            viewModel.getPoemData();
+            viewModel.getRandomPoemData();
             binding.randomRefresh.setRefreshing(false);
         });
 
-        viewModel.poem().observe(this, randomPoem -> {
+        viewModel.poemRandom().observe(this, randomPoem -> {
             // save current model so its present when navigating back to this fragment
             currentPoemModel = randomPoem;
 
-            poemBinding.randomTitle.setText(randomPoem.getTitle());
-            poemBinding.randomAuthor.setText(randomPoem.getAuthor());
+            poemBinding.poemTitle.setText(randomPoem.getTitle());
+            poemBinding.poemAuthor.setText(randomPoem.getAuthor());
             StringBuilder builder = new StringBuilder();
             for (String details : randomPoem.getLines()) {
                 builder.append(details + "\n");
             }
-            poemBinding.randomPoem.setText(builder.toString());
+            poemBinding.poemPoem.setText(builder.toString());
             //add to favs
             poemBinding.addToFavs.setOnClickListener(v -> {
                         viewModel.addToFavourites(randomPoem.getTitle());

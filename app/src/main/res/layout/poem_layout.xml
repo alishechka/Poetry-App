@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
-        android:id="@+id/random_title"
+        android:id="@+id/poem_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -10,28 +10,28 @@
         android:hint="Except the Heaven had come so near"
         android:textColor="#000000"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/random_author"
+        app:layout_constraintBottom_toTopOf="@+id/poem_author"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:padding="5dp"
-        android:id="@+id/random_author"
+        android:id="@+id/poem_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="Emily Dickinson"
         android:textColor="#000000"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@id/random_poem"
+        app:layout_constraintBottom_toTopOf="@id/poem_poem"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/random_title" />
+        app:layout_constraintTop_toBottomOf="@id/poem_title" />
 
     <TextView
         android:textColor="#000000"
-        android:id="@+id/random_poem"
+        android:id="@+id/poem_poem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -40,16 +40,16 @@
         app:layout_constraintBottom_toTopOf="@id/add_to_favs"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/random_author" />
+        app:layout_constraintTop_toBottomOf="@id/poem_author" />
 
     <Button
         android:id="@+id/add_to_favs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="fav it moss"
+        android:text="fav it"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/random_poem"
+        app:layout_constraintTop_toBottomOf="@id/poem_poem"
         app:layout_constraintBottom_toTopOf="@id/add_to_roomdb"
 
         />

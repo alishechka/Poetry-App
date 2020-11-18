@@ -20,9 +20,14 @@ public class MainViewModel extends ViewModel {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Repository repo = new Repository();
+    private MutableLiveData<PoemModel> _poemRandom = new MutableLiveData<>();
     private MutableLiveData<PoemModel> _poem = new MutableLiveData<>();
     private MutableLiveData<String> _error = new MutableLiveData<>();
     private MutableLiveData<Favourites> _favourites = new MutableLiveData<>();
+
+    public LiveData<PoemModel> poemRandom() {
+        return _poemRandom;
+    }
 
     public LiveData<PoemModel> poem() {
         return _poem;
@@ -36,12 +41,12 @@ public class MainViewModel extends ViewModel {
         return _error;
     }
 
-    public void getPoemData() {
+    public void getRandomPoemData() {
         compositeDisposable.add(
                 repo.getRandomPoemRepo().subscribeWith(new DisposableSingleObserver<PoemModel>() {
                     @Override
                     public void onSuccess(PoemModel poemModels) {
-                        _poem.setValue(poemModels);
+                        _poemRandom.setValue(poemModels);
 //                        repo.addPoemToDb(poemModels);
 
                     }
@@ -114,6 +119,15 @@ public class MainViewModel extends ViewModel {
         compositeDisposable.add(
                 repo.getFavouritesList().subscribe(
                         data -> _favourites.setValue(data),
+                        e -> _error.setValue(e.getMessage())
+                )
+        );
+    }
+
+    public void getPoem(String title) {
+        compositeDisposable.add(
+                repo.getPoem(title).subscribe(
+                        data -> _poem.setValue(data),
                         e -> _error.setValue(e.getMessage())
                 )
         );

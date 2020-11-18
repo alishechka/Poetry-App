@@ -51,5 +51,10 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Single<PoemModel> getPoem(String title) {
+        return RetrofitInstance.service.getPoem(title)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
 }

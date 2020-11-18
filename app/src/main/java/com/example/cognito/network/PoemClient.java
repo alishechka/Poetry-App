@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface PoemClient {
     @GET("random")
@@ -19,5 +20,8 @@ public interface PoemClient {
     Completable putFavourite(@Header("Authorization") String token, @Body FavouritesBody poemTitle);
 
     @GET("favourites")
-    Single<Favourites>getFavourites(@Header("Authorization") String token);
+    Single<Favourites> getFavourites(@Header("Authorization") String token);
+
+    @GET("title2")
+    Single<PoemModel> getPoem(@Query("title") String title);
 }
