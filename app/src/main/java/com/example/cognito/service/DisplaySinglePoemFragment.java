@@ -50,6 +50,7 @@ public class DisplaySinglePoemFragment extends Fragment {
                     builder.append(details + "\n");
                 }
                 poemBinding.poemPoem.setText(builder.toString());
+                poemBinding.favsToggler.setChecked(true);
             });
         }
     }

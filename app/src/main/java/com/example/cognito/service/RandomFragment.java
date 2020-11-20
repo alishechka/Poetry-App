@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cognito.MainViewModel;
+import com.example.cognito.R;
 import com.example.cognito.databinding.FragmentRandomBinding;
 import com.example.cognito.databinding.PoemLayoutBinding;
 import com.example.cognito.model.PoemModel;
@@ -20,6 +22,7 @@ public class RandomFragment extends Fragment {
     private FragmentRandomBinding binding;
     private PoemLayoutBinding poemBinding;
     private PoemModel currentPoemModel;
+    private boolean faved;
 
     @Nullable
     @Override
@@ -35,6 +38,7 @@ public class RandomFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+        //to display previously loaded PoemModel
         if (currentPoemModel != null) {
             poemBinding.poemTitle.setText(currentPoemModel.getTitle());
             poemBinding.poemAuthor.setText(currentPoemModel.getAuthor());
@@ -43,6 +47,16 @@ public class RandomFragment extends Fragment {
                 builder.append(details + "\n");
             }
             poemBinding.poemPoem.setText(builder.toString());
+            poemBinding.favsToggler.setChecked(faved);
+            manageToggleDrawableState(faved);
+//            viewModel.getFavourites();
+//            viewModel.favourites().observe(this, favs -> {
+//                for (String title : favs.getFavourites()) {
+//                    if (currentPoemModel.getTitle().equals(title)) {
+//                        poemBinding.favsToggler.setChecked(true);
+//                    }
+//                }
+//            });
         }
 
         binding.randomRefresh.setOnRefreshListener(() -> {
@@ -54,6 +68,7 @@ public class RandomFragment extends Fragment {
             // save current model so its present when navigating back to this fragment
             currentPoemModel = randomPoem;
 
+            //display and populate views
             poemBinding.poemTitle.setText(randomPoem.getTitle());
             poemBinding.poemAuthor.setText(randomPoem.getAuthor());
             StringBuilder builder = new StringBuilder();
@@ -61,17 +76,42 @@ public class RandomFragment extends Fragment {
                 builder.append(details + "\n");
             }
             poemBinding.poemPoem.setText(builder.toString());
-            //add to favs
-            poemBinding.addToFavs.setOnClickListener(v -> {
-                        viewModel.addToFavourites(randomPoem.getTitle());
-                    }
-            );
-            viewModel.addToRoomDB(randomPoem);
-            poemBinding.addToRoomdb.setOnClickListener(v -> {
-                viewModel.getPoemByTitle(randomPoem.getTitle());
-            });
-        });
 
+            //add to favs
+
+            //check if current Poem has been faved before
+//            viewModel.getFavourites();
+//            viewModel.favourites().observe(this, favs -> {
+//                for (String title : favs.getFavourites()) {
+//                    if (randomPoem.getTitle().equals(title)) {
+//                        poemBinding.favsToggler.setChecked(true);
+//                    } else {
+//                        poemBinding.favsToggler.setChecked(false);
+//
+//                    }
+//                }
+//            });
+            viewModel.addToRoomDB(randomPoem);
+            poemBinding.addToRoomdb.setOnClickListener(v ->
+                    viewModel.getPoemByTitle(randomPoem.getTitle()));
+        });
+        poemBinding.favsToggler.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> {
+                    faved = isChecked;
+                    manageToggleDrawableState(isChecked);
+                    if (isChecked) {
+                        viewModel.addToFavourites(currentPoemModel.getTitle());
+                    }
+                }
+        );
+    }
+
+    public void manageToggleDrawableState(boolean checked) {
+        if (checked) {
+            poemBinding.favsToggler.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_fav_on));
+        } else {
+            poemBinding.favsToggler.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_fav_off));
+        }
     }
 
     @Override

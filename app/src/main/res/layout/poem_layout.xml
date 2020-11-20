@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <TextView
         android:id="@+id/poem_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="5dp"
         android:hint="Except the Heaven had come so near"
+        android:padding="5dp"
         android:textColor="#000000"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/poem_author"
@@ -16,12 +17,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:padding="5dp"
         android:id="@+id/poem_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="Emily Dickinson"
+        android:padding="5dp"
         android:textColor="#000000"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@id/poem_poem"
@@ -30,27 +31,29 @@
         app:layout_constraintTop_toBottomOf="@id/poem_title" />
 
     <TextView
-        android:textColor="#000000"
         android:id="@+id/poem_poem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:hint="@string/large_sample_poem"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@id/add_to_favs"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@id/favs_toggler"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/poem_author" />
 
-    <Button
-        android:id="@+id/add_to_favs"
-        android:layout_width="match_parent"
+    <ToggleButton
+        android:id="@+id/favs_toggler"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fav it"
+        android:background="@drawable/ic_fav_off"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toTopOf="@id/add_to_roomdb"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/poem_poem"
-        app:layout_constraintBottom_toTopOf="@id/add_to_roomdb"
 
         />
 
@@ -59,10 +62,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="add_to_roomdb"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_to_favs"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favs_toggler"
 
         />
 
