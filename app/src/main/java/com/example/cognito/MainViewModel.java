@@ -12,8 +12,6 @@ import com.example.cognito.model.PoemModel;
 import com.example.cognito.repo.Repository;
 
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableCompletableObserver;
-import io.reactivex.observers.DisposableSingleObserver;
 import timber.log.Timber;
 
 public class MainViewModel extends ViewModel {
@@ -43,23 +41,15 @@ public class MainViewModel extends ViewModel {
 
     public void getRandomPoemData() {
         compositeDisposable.add(
-                repo.getRandomPoemRepo().subscribeWith(new DisposableSingleObserver<PoemModel>() {
-                    @Override
-                    public void onSuccess(PoemModel poemModels) {
-                        _poemRandom.setValue(poemModels);
-//                        repo.addPoemToDb(poemModels);
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        _error.setValue(e.getLocalizedMessage());
-                        Timber.d("failed to get PoemData");
-                        Timber.d(Log.getStackTraceString(e));
-                        Timber.d(e);
-
-                    }
-                })
+                repo.getRandomPoemRepo().subscribe(
+                        poemModels ->
+                                _poemRandom.setValue(poemModels),
+                        e -> {
+                            _error.setValue(e.getLocalizedMessage());
+                            Timber.d("failed to get PoemData");
+                            Timber.d(Log.getStackTraceString(e));
+                            Timber.d(e);
+                        })
         );
     }
 
@@ -67,51 +57,38 @@ public class MainViewModel extends ViewModel {
         compositeDisposable.add(
                 repo.getPoemFromDb(title).subscribe(
                         i -> Timber.d(String.valueOf(i)),
-                        Timber::d)
-
-        );
+                        e -> _error.setValue(e.getLocalizedMessage())
+                ));
     }
 
     public void addToRoomDB(PoemModel model) {
         compositeDisposable.add(
-                repo.addPoemToDb(model).subscribeWith(new DisposableCompletableObserver() {
-
-                    @Override
-                    public void onComplete() {
-                        Timber.d("WIN added to ROOM DB");
-                        Timber.d("added %s", model);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.d("FAIL to add to ROOM DB");
-                    }
-                })
+                repo.addPoemToDb(model).subscribe(
+                        () -> {
+                            Timber.d("WIN added to ROOM DB");
+                            Timber.d("added %s", model);
+                        },
+                        e -> {
+                            Timber.d("FAIL to add to ROOM DB");
+                            Timber.d(e.getLocalizedMessage());
+                        }
+                )
         );
     }
 
 
     public void addToFavourites(String poemTitle) {
         compositeDisposable.add(
-//                repo.addToFavouritesList(poemTitle).subscribe(()->Timber.d("SUCCESS added to favs list: %s", poemTitle),
-//                        e -> Timber.d(e.getLocalizedMessage()))
-                repo.addToFavouritesList(poemTitle).subscribeWith(new DisposableCompletableObserver() {
-
-                    @Override
-                    public void onComplete() {
-                        Timber.d("SUCCESS added to favs list: %s", poemTitle);
-                        Toast.makeText(App.getAppContext(), "added to Favs", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(App.getAppContext(), "failed to add to favs", Toast.LENGTH_SHORT).show();
-                        Timber.e("error adding to favourites: ");
-                        Timber.e(e);
-                        Timber.e(e.getLocalizedMessage());
-                        Timber.e(Log.getStackTraceString(e));
-                    }
-                })
+                repo.addToFavouritesList(poemTitle).subscribe(
+                        () -> {
+                            Timber.d("SUCCESS added to favs list: %s", poemTitle);
+                            Toast.makeText(App.getAppContext(), "added to Favs", Toast.LENGTH_SHORT).show();
+                        },
+                        e -> {
+                            Toast.makeText(App.getAppContext(), "failed to add to favs", Toast.LENGTH_SHORT).show();
+                            Timber.e(e.getLocalizedMessage());
+                        }
+                )
         );
     }
 

@@ -17,6 +17,10 @@ import com.example.cognito.databinding.FragmentRandomBinding;
 import com.example.cognito.databinding.PoemLayoutBinding;
 import com.example.cognito.model.PoemModel;
 
+import org.jetbrains.annotations.NotNull;
+
+import timber.log.Timber;
+
 public class RandomFragment extends Fragment {
     private MainViewModel viewModel;
     private FragmentRandomBinding binding;
@@ -40,15 +44,10 @@ public class RandomFragment extends Fragment {
 
         //to display previously loaded PoemModel
         if (currentPoemModel != null) {
-            poemBinding.poemTitle.setText(currentPoemModel.getTitle());
-            poemBinding.poemAuthor.setText(currentPoemModel.getAuthor());
-            StringBuilder builder = new StringBuilder();
-            for (String details : currentPoemModel.getLines()) {
-                builder.append(details + "\n");
-            }
-            poemBinding.poemPoem.setText(builder.toString());
+            setPoemViews(currentPoemModel);
             poemBinding.favsToggler.setChecked(faved);
             manageToggleDrawableState(faved);
+            Timber.d("if not equal null %s",faved);
 //            viewModel.getFavourites();
 //            viewModel.favourites().observe(this, favs -> {
 //                for (String title : favs.getFavourites()) {
@@ -60,24 +59,19 @@ public class RandomFragment extends Fragment {
         }
 
         binding.randomRefresh.setOnRefreshListener(() -> {
+//            currentPoemModel=null;
             viewModel.getRandomPoemData();
             binding.randomRefresh.setRefreshing(false);
+
         });
 
         viewModel.poemRandom().observe(this, randomPoem -> {
             // save current model so its present when navigating back to this fragment
             currentPoemModel = randomPoem;
+            setPoemViews(randomPoem);
 
-            //display and populate views
-            poemBinding.poemTitle.setText(randomPoem.getTitle());
-            poemBinding.poemAuthor.setText(randomPoem.getAuthor());
-            StringBuilder builder = new StringBuilder();
-            for (String details : randomPoem.getLines()) {
-                builder.append(details + "\n");
-            }
-            poemBinding.poemPoem.setText(builder.toString());
-
-            //add to favs
+            //TODO will have to check if currently in favs list
+            poemBinding.favsToggler.setChecked(false);
 
             //check if current Poem has been faved before
 //            viewModel.getFavourites();
@@ -97,6 +91,7 @@ public class RandomFragment extends Fragment {
         });
         poemBinding.favsToggler.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> {
+                    Timber.d("on clicked toggler %s",isChecked);
                     faved = isChecked;
                     manageToggleDrawableState(isChecked);
                     if (isChecked) {
@@ -104,6 +99,16 @@ public class RandomFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    private void setPoemViews(PoemModel randomPoem) {
+        poemBinding.poemTitle.setText(randomPoem.getTitle());
+        poemBinding.poemAuthor.setText(randomPoem.getAuthor());
+        StringBuilder builder = new StringBuilder();
+        for (String details : randomPoem.getLines()) {
+            builder.append(details + "\n");
+        }
+        poemBinding.poemPoem.setText(builder.toString());
     }
 
     public void manageToggleDrawableState(boolean checked) {
