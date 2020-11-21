@@ -3,6 +3,9 @@ package com.example.cognito.network;
 import com.example.cognito.model.Favourites;
 import com.example.cognito.model.FavouritesBody;
 import com.example.cognito.model.PoemModel;
+import com.example.cognito.model.TitleSearch;
+
+import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -24,4 +27,7 @@ public interface PoemClient {
 
     @GET("title2")
     Single<PoemModel> getPoem(@Query("title") String title);
+
+    @GET("titleSearch")
+    Single<List<TitleSearch>> getTitleSearch(@Query("title") String title);
 }

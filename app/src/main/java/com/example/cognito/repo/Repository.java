@@ -1,20 +1,19 @@
 package com.example.cognito.repo;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.cognito.App;
 import com.example.cognito.dao.RandomPoemDatabase;
 import com.example.cognito.model.Favourites;
 import com.example.cognito.model.FavouritesBody;
 import com.example.cognito.model.PoemModel;
+import com.example.cognito.model.TitleSearch;
 import com.example.cognito.network.RetrofitInstance;
 
+import java.util.List;
+
 import io.reactivex.Completable;
-import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 import static com.example.cognito.common.Constants.ACCESS_TOKEN;
 
@@ -53,6 +52,11 @@ public class Repository {
 
     public Single<PoemModel> getPoem(String title) {
         return RetrofitInstance.service.getPoem(title)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+    public Single<List<TitleSearch>> getTitleSearch(String title){
+        return RetrofitInstance.service.getTitleSearch(title)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

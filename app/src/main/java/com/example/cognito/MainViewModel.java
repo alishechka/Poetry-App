@@ -9,7 +9,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.cognito.model.Favourites;
 import com.example.cognito.model.PoemModel;
+import com.example.cognito.model.TitleSearch;
 import com.example.cognito.repo.Repository;
+
+import java.util.List;
 
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
@@ -22,6 +25,7 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<PoemModel> _poem = new MutableLiveData<>();
     private MutableLiveData<String> _error = new MutableLiveData<>();
     private MutableLiveData<Favourites> _favourites = new MutableLiveData<>();
+    private MutableLiveData<List<TitleSearch>> _titleSearch = new MutableLiveData<>();
 
     public LiveData<PoemModel> poemRandom() {
         return _poemRandom;
@@ -35,9 +39,14 @@ public class MainViewModel extends ViewModel {
         return _favourites;
     }
 
+    public LiveData<List<TitleSearch>> titleSearch() {
+        return _titleSearch;
+    }
+
     public LiveData<String> error() {
         return _error;
     }
+
 
     public void getRandomPoemData() {
         compositeDisposable.add(
@@ -105,6 +114,15 @@ public class MainViewModel extends ViewModel {
         compositeDisposable.add(
                 repo.getPoem(title).subscribe(
                         data -> _poem.setValue(data),
+                        e -> _error.setValue(e.getMessage())
+                )
+        );
+    }
+
+    public void getTitleSearch(String title) {
+        compositeDisposable.add(
+                repo.getTitleSearch(title).subscribe(
+                        data -> _titleSearch.setValue(data),
                         e -> _error.setValue(e.getMessage())
                 )
         );

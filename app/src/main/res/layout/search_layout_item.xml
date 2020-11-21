@@ -10,17 +10,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:background="#878585"
-        >
+        android:padding="5dp">
 
         <TextView
-            android:paddingLeft="15dp"
-            android:background="@drawable/shadow"
-            android:id="@+id/favourite_item_title"
+            android:id="@+id/search_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Except the Heaven had come so near"
+            android:background="@drawable/shadow"
+            android:hint="search result"
+            android:paddingLeft="15dp"
             android:textColor="@color/colorPrimary"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -17,8 +17,6 @@ import com.example.cognito.databinding.FragmentRandomBinding;
 import com.example.cognito.databinding.PoemLayoutBinding;
 import com.example.cognito.model.PoemModel;
 
-import org.jetbrains.annotations.NotNull;
-
 import timber.log.Timber;
 
 public class RandomFragment extends Fragment {
@@ -47,7 +45,7 @@ public class RandomFragment extends Fragment {
             setPoemViews(currentPoemModel);
             poemBinding.favsToggler.setChecked(faved);
             manageToggleDrawableState(faved);
-            Timber.d("if not equal null %s",faved);
+            Timber.d("if not equal null %s", faved);
 //            viewModel.getFavourites();
 //            viewModel.favourites().observe(this, favs -> {
 //                for (String title : favs.getFavourites()) {
@@ -59,10 +57,8 @@ public class RandomFragment extends Fragment {
         }
 
         binding.randomRefresh.setOnRefreshListener(() -> {
-//            currentPoemModel=null;
             viewModel.getRandomPoemData();
             binding.randomRefresh.setRefreshing(false);
-
         });
 
         viewModel.poemRandom().observe(this, randomPoem -> {
@@ -89,9 +85,10 @@ public class RandomFragment extends Fragment {
             poemBinding.addToRoomdb.setOnClickListener(v ->
                     viewModel.getPoemByTitle(randomPoem.getTitle()));
         });
+
         poemBinding.favsToggler.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> {
-                    Timber.d("on clicked toggler %s",isChecked);
+                    Timber.d("on clicked toggler %s", isChecked);
                     faved = isChecked;
                     manageToggleDrawableState(isChecked);
                     if (isChecked) {
