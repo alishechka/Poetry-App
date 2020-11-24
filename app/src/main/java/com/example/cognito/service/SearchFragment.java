@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.cognito.MainViewModel;
+import com.example.cognito.OnClickedListener;
 import com.example.cognito.R;
 import com.example.cognito.TitleSearchAdapter;
 import com.example.cognito.databinding.FragmentSearchBinding;
@@ -23,7 +25,9 @@ import java.util.TimerTask;
 
 import timber.log.Timber;
 
-public class SearchFragment extends Fragment {
+import static com.example.cognito.common.Constants.POEM_TITLE;
+
+public class SearchFragment extends Fragment implements OnClickedListener {
     private FragmentSearchBinding binding;
     private MainViewModel viewModel;
     private TitleSearchAdapter adapter;
@@ -42,9 +46,10 @@ public class SearchFragment extends Fragment {
 
         viewModel.titleSearch().observe(this, titleSearches -> {
             binding.searchRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-            adapter = new TitleSearchAdapter(titleSearches);
+            adapter = new TitleSearchAdapter(titleSearches, this);
             binding.searchRecyclerView.setAdapter(adapter);
         });
+        viewModel.error().observe(this, e -> Timber.d(e));
 
         binding.searchSearch.addTextChangedListener(new TextWatcher() {
             private Timer timer = new Timer();
@@ -74,5 +79,20 @@ public class SearchFragment extends Fragment {
                         }, DELAY);
             }
         });
+    }
+
+    @Override
+    public void onItemClicked(String title) {
+        Timber.d(title);
+        Bundle bundle = new Bundle();
+        bundle.putString(POEM_TITLE, title);
+
+        Fragment frag = new DisplaySinglePoemFragment();
+        frag.setArguments(bundle);
+        FragmentManager ft = getFragmentManager();
+        ft.beginTransaction()
+                .replace(R.id.fragment_container, frag)
+                .addToBackStack("tag")
+                .commit();
     }
 }

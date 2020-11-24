@@ -14,9 +14,11 @@ import java.util.List;
 
 public class TitleSearchAdapter extends RecyclerView.Adapter<TitleSearchAdapter.titleSearchViewHolder> {
     private List<TitleSearch> model;
+    private OnClickedListener listener;
 
-    public TitleSearchAdapter(List<TitleSearch> model) {
+    public TitleSearchAdapter(List<TitleSearch> model, OnClickedListener listener) {
         this.model = model;
+        this.listener = listener;
     }
 
     @NonNull
@@ -47,6 +49,9 @@ public class TitleSearchAdapter extends RecyclerView.Adapter<TitleSearchAdapter.
 
         public void bind(Integer position) {
             searchTitle.setText(model.get(position).getTitle());
+            itemView.setOnClickListener(v ->
+                    listener.onItemClicked(model.get(position).getTitle())
+            );
         }
     }
 }
