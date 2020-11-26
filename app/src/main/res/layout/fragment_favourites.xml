@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/darker_gray">
+    android:layout_margin="8dp">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/favourites_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/favourites_layout_item"
-          />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favourites_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_favourites_backdrop"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/favourites_layout_item" />
 
 </androidx.core.widget.NestedScrollView>

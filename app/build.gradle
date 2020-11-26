@@ -24,7 +24,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    viewBinding.enabled=true
+    viewBinding.enabled = true
 
 }
 
@@ -83,5 +83,11 @@ dependencies {
 
     //Timber for logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    //Mockito
+    testImplementation "org.mockito:mockito-core:2.28.2"
+
+    // Test rule for LiveData
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
 }

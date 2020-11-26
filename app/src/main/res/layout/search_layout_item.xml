@@ -10,17 +10,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#878585"
+        android:background="#F0B889"
         android:padding="5dp">
 
         <TextView
             android:id="@+id/search_item_title"
+            style="@style/PoemText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shadow"
+            android:background="@drawable/shape_favourites"
             android:hint="search result"
             android:paddingLeft="15dp"
-            android:textColor="@color/colorPrimary"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

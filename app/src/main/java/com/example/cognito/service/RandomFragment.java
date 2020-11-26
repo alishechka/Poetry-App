@@ -82,8 +82,8 @@ public class RandomFragment extends Fragment {
 //                }
 //            });
             viewModel.addToRoomDB(randomPoem);
-            poemBinding.addToRoomdb.setOnClickListener(v ->
-                    viewModel.getPoemByTitle(randomPoem.getTitle()));
+//            poemBinding.addToRoomdb.setOnClickListener(v ->
+//                    viewModel.getPoemByTitle(randomPoem.getTitle()));
         });
 
         poemBinding.favsToggler.setOnCheckedChangeListener(

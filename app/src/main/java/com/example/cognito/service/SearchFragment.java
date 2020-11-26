@@ -31,6 +31,7 @@ public class SearchFragment extends Fragment implements OnClickedListener {
     private FragmentSearchBinding binding;
     private MainViewModel viewModel;
     private TitleSearchAdapter adapter;
+    private final long DELAY = 3000; // milliseconds
 
     @Nullable
     @Override
@@ -53,7 +54,6 @@ public class SearchFragment extends Fragment implements OnClickedListener {
 
         binding.searchSearch.addTextChangedListener(new TextWatcher() {
             private Timer timer = new Timer();
-            private final long DELAY = 3000; // milliseconds
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

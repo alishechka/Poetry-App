@@ -19,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        getSupportActionBar().hide();
+//        this.setTitle("yoyo");
         setContentView(R.layout.activity_main);
 
         btnLogin = findViewById(R.id.button_main_login);
         btnSignup = findViewById(R.id.button_main_signup);
-        btnLogout = findViewById(R.id.button_main_logout);
+//        btnLogout = findViewById(R.id.button_main_logout);
 
         btnLogin.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);

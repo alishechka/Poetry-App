@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.cognito.databinding.ActivityPoetryServiceBinding;
 import com.example.cognito.service.FavouriteFragment;
 import com.example.cognito.service.RandomFragment;
 import com.example.cognito.service.SearchFragment;
@@ -13,13 +14,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class PoetryServiceActivity extends AppCompatActivity {
     private RandomFragment randomFragment;
     private final String RANDOM_FRAGMENT = "myRandomFragmentTag";
+    private ActivityPoetryServiceBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_poetry_service);
+        binding = ActivityPoetryServiceBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-
+        binding.appbar.toolBar.setTitle("PoetryApp");
+        setSupportActionBar(binding.appbar.toolBar);
 //        if (savedInstanceState == null) {
 //            bottomNavigationView.setSelectedItemId(R.id.nav_random);
 //        }
