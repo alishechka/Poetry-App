@@ -1,4 +1,4 @@
-package com.example.cognito;
+package com.example.cognito.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cognito.OnClickedListener;
+import com.example.cognito.R;
 import com.example.cognito.model.TitleSearch;
 
 import java.util.List;

@@ -11,4 +11,36 @@ I never thought to see —\n
 Afflicts me with a Double loss —\n
 Tis lost — and lost to me —\n
     </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_body">
+        Dear guest, \n
+        \n
+        I hope you\'ve enjoyed using this app,
+        my name is Ali and I am a Junior Android Dev. \n
+        \n
+        The purpose of this app was to learn AWS Lambdas,
+        additionally DynamoDB, API Gateway and Cognito. \n
+        \n
+        This app feeds off from Lambdas which in turn
+        feed off from https://poetrydb.org/ \n
+        \n
+        Feel free to SignUp and create a favourites list of your own,
+        you will get the confirmation code via email
+
+    </string>
+
+    <string name="about_random">
+        >> Random - swipe down to refresh,
+        click heart icon to save to favourites list in DynamoDB
+    </string>
+    <string name="about_favourites">
+        >> Favourites - can view you list of favourite poems,
+        can click to view it
+    </string>
+    <string name="about_search">
+        >> Search - can search by titles,
+        will initiate 3 seconds after you\'ve stopped typing
+    </string>
+    <string name="app_bar_title">PoetryApp</string>
 </resources>

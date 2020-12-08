@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PoetryServiceActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".OptionsMenuActivity"></activity>
+        <activity
+            android:name=".PoetryServiceActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".login.LogoutActivity" />
         <activity android:name=".login.SignInActivity" />
         <activity android:name=".login.ValidateActivity" />

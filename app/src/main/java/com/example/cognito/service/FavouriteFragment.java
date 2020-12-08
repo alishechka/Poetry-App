@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.cognito.FavouritesAdapter;
+import com.example.cognito.adapter.FavouritesAdapter;
 import com.example.cognito.MainViewModel;
 import com.example.cognito.OnClickedListener;
 import com.example.cognito.R;
@@ -26,7 +26,6 @@ import static com.example.cognito.common.Constants.POEM_TITLE;
 public class FavouriteFragment extends Fragment implements OnClickedListener {
     private MainViewModel viewModel;
     private FragmentFavouritesBinding binding;
-    private Favourites currentFavourites;
     private FavouritesAdapter adapter;
 
     @Nullable

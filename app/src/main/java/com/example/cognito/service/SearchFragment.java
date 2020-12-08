@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.cognito.MainViewModel;
 import com.example.cognito.OnClickedListener;
 import com.example.cognito.R;
-import com.example.cognito.TitleSearchAdapter;
+import com.example.cognito.adapter.TitleSearchAdapter;
 import com.example.cognito.databinding.FragmentSearchBinding;
 
 import java.util.Timer;

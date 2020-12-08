@@ -11,7 +11,7 @@ import com.example.cognito.service.RandomFragment;
 import com.example.cognito.service.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class PoetryServiceActivity extends AppCompatActivity {
+public class PoetryServiceActivity extends OptionsMenuActivity {
     private RandomFragment randomFragment;
     private final String RANDOM_FRAGMENT = "myRandomFragmentTag";
     private ActivityPoetryServiceBinding binding;
@@ -22,16 +22,11 @@ public class PoetryServiceActivity extends AppCompatActivity {
         binding = ActivityPoetryServiceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.appbar.toolBar.setTitle("PoetryApp");
+        binding.appbar.toolBar.setTitle(R.string.app_bar_title);
         setSupportActionBar(binding.appbar.toolBar);
-//        if (savedInstanceState == null) {
-//            bottomNavigationView.setSelectedItemId(R.id.nav_random);
-//        }
+
         if (savedInstanceState != null) {
             randomFragment = (RandomFragment) getSupportFragmentManager().findFragmentByTag(RANDOM_FRAGMENT);
-//            if (randomFragment == null) {
-//                randomFragment = new RandomFragment();
-//            }
 
         } else if (randomFragment == null) {
             randomFragment = new RandomFragment();
@@ -47,11 +42,6 @@ public class PoetryServiceActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_random:
                         swapFragment(randomFragment, item.getItemId(), RANDOM_FRAGMENT);
-////                        selectedFragment = new RandomFragment();
-//                        getSupportFragmentManager()
-//                                .beginTransaction()
-//                                .add(R.id.fragment_container, randomFragment, RANDOM_FRAGMENT)
-//                                .commit();
                         break;
                     case R.id.nav_favourites:
                         selectedFragment = new FavouriteFragment();
