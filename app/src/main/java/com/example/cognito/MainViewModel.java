@@ -101,6 +101,19 @@ public class MainViewModel extends ViewModel {
         );
     }
 
+    public void removeFavourite(String poemTitle) {
+        compositeDisposable.add(
+                repo.removeFromFavourites(poemTitle).subscribe(
+                        () -> {
+                            Timber.d("Removed from Fav List: %s", poemTitle);
+                        },
+                        e -> {
+                            Timber.e("failed to remove from fav list: %s", poemTitle);
+                        }
+                )
+        );
+    }
+
     public void getFavourites() {
         compositeDisposable.add(
                 repo.getFavouritesList().subscribe(

@@ -25,6 +25,9 @@ public interface PoemClient {
     @GET("favourites")
     Single<Favourites> getFavourites(@Header("Authorization") String token);
 
+    @GET("favourites")
+    Completable removeFavourite(@Header("Authorization") String token, @Body FavouritesBody poemTitle);
+
     @GET("title2")
     Single<PoemModel> getPoem(@Query("title") String title);
 

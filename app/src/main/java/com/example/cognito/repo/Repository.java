@@ -44,18 +44,27 @@ public class Repository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Completable removeFromFavourites(String poemTitle) {
+        FavouritesBody body = new FavouritesBody(poemTitle);
+        return RetrofitInstance.service.removeFavourite("Bearer " + ACCESS_TOKEN, body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Single<Favourites> getFavouritesList() {
         return RetrofitInstance.service.getFavourites("Bearer " + ACCESS_TOKEN)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+
     public Single<PoemModel> getPoem(String title) {
         return RetrofitInstance.service.getPoem(title)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-    public Single<List<TitleSearch>> getTitleSearch(String title){
+
+    public Single<List<TitleSearch>> getTitleSearch(String title) {
         return RetrofitInstance.service.getTitleSearch(title)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
