@@ -4,24 +4,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.cognito.App;
 import com.example.cognito.MainViewModel;
+import com.example.cognito.R;
 import com.example.cognito.databinding.FragmentSinglePoemBinding;
 import com.example.cognito.databinding.PoemLayoutBinding;
+import com.example.cognito.model.PoemModel;
 
 import timber.log.Timber;
 
+import static com.example.cognito.common.Constants.IS_CHECKED;
 import static com.example.cognito.common.Constants.POEM_TITLE;
 
 public class DisplaySinglePoemFragment extends Fragment {
     private MainViewModel viewModel;
     private FragmentSinglePoemBinding binding;
     private PoemLayoutBinding poemBinding;
+    private PoemModel currentPoemModel;
 
     @Nullable
     @Override
@@ -40,9 +47,12 @@ public class DisplaySinglePoemFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             final String title = bundle.getString(POEM_TITLE);
+            final boolean faved = bundle.getBoolean(IS_CHECKED);
+
             viewModel.getPoem(title);
             Timber.d("viewModel called %s", title);
             viewModel.poem().observe(this, poem -> {
+                currentPoemModel = poem;
                 poemBinding.poemTitle.setText(poem.getTitle());
                 poemBinding.poemAuthor.setText(poem.getAuthor());
                 StringBuilder builder = new StringBuilder();
@@ -50,8 +60,21 @@ public class DisplaySinglePoemFragment extends Fragment {
                     builder.append(details + "\n");
                 }
                 poemBinding.poemPoem.setText(builder.toString());
-                poemBinding.favsToggler.setChecked(true);
+                poemBinding.favsToggler.setChecked(faved);
+
             });
+            poemBinding.favsToggler.setOnCheckedChangeListener(
+                    (buttonView, isChecked) -> {
+                        Timber.d("on clicked toggler %s", isChecked);
+                        if (isChecked) {
+                            viewModel.addToFavourites(currentPoemModel.getTitle());
+                            buttonView.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_fav_on));
+                        } else {
+                            viewModel.removeFavourite(currentPoemModel.getTitle());
+                            buttonView.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_fav_off));
+                        }
+                    }
+            );
         }
     }
 

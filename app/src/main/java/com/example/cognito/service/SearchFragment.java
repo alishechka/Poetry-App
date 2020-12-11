@@ -25,6 +25,7 @@ import java.util.TimerTask;
 
 import timber.log.Timber;
 
+import static com.example.cognito.common.Constants.IS_CHECKED;
 import static com.example.cognito.common.Constants.POEM_TITLE;
 
 public class SearchFragment extends Fragment implements OnClickedListener {
@@ -86,6 +87,7 @@ public class SearchFragment extends Fragment implements OnClickedListener {
         Timber.d(title);
         Bundle bundle = new Bundle();
         bundle.putString(POEM_TITLE, title);
+        bundle.putBoolean(IS_CHECKED,false);
 
         Fragment frag = new DisplaySinglePoemFragment();
         frag.setArguments(bundle);

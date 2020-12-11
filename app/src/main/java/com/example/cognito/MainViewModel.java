@@ -92,10 +92,8 @@ public class MainViewModel extends ViewModel {
                 repo.addToFavouritesList(poemTitle).subscribe(
                         () -> {
                             Timber.d("SUCCESS added to favs list: %s", poemTitle);
-                            Toast.makeText(App.getAppContext(), "added to Favs", Toast.LENGTH_SHORT).show();
                         },
                         e -> {
-                            Toast.makeText(App.getAppContext(), "failed to add to favs", Toast.LENGTH_SHORT).show();
                             Timber.e(e.getLocalizedMessage());
                         }
                 )

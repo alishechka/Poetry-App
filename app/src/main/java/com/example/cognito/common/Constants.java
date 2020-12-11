@@ -5,4 +5,5 @@ public class Constants {
     public static final String POEM_TABLE_NAME = "poem_model";
     public static String ACCESS_TOKEN = null;
     public static final String POEM_TITLE="title";
+    public static final String IS_CHECKED="favourite";
 }
