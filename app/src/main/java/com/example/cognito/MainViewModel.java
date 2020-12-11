@@ -87,6 +87,7 @@ public class MainViewModel extends ViewModel {
 
 
     public void addToFavourites(String poemTitle) {
+
         compositeDisposable.add(
                 repo.addToFavouritesList(poemTitle).subscribe(
                         () -> {

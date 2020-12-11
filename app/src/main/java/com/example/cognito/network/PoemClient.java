@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface PoemClient {
@@ -25,7 +26,7 @@ public interface PoemClient {
     @GET("favourites")
     Single<Favourites> getFavourites(@Header("Authorization") String token);
 
-    @GET("favourites")
+    @PUT("favourites")
     Completable removeFavourite(@Header("Authorization") String token, @Body FavouritesBody poemTitle);
 
     @GET("title2")

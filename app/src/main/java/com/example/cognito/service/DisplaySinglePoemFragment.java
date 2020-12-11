@@ -41,7 +41,7 @@ public class DisplaySinglePoemFragment extends Fragment {
         if (bundle != null) {
             final String title = bundle.getString(POEM_TITLE);
             viewModel.getPoem(title);
-            Timber.d("viewModel called %s",title);
+            Timber.d("viewModel called %s", title);
             viewModel.poem().observe(this, poem -> {
                 poemBinding.poemTitle.setText(poem.getTitle());
                 poemBinding.poemAuthor.setText(poem.getAuthor());

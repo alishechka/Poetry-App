@@ -32,7 +32,6 @@ public class RandomFragment extends Fragment {
         binding = FragmentRandomBinding.inflate(inflater, container, false);
         poemBinding = PoemLayoutBinding.bind(binding.getRoot());
         return binding.getRoot();
-
     }
 
     @Override
@@ -46,6 +45,7 @@ public class RandomFragment extends Fragment {
             poemBinding.favsToggler.setChecked(faved);
             manageToggleDrawableState(faved);
             Timber.d("if not equal null %s", faved);
+
 //            viewModel.getFavourites();
 //            viewModel.favourites().observe(this, favs -> {
 //                for (String title : favs.getFavourites()) {
@@ -66,24 +66,20 @@ public class RandomFragment extends Fragment {
             currentPoemModel = randomPoem;
             setPoemViews(randomPoem);
 
-            //TODO will have to check if currently in favs list
             poemBinding.favsToggler.setChecked(false);
 
-            //check if current Poem has been faved before
-//            viewModel.getFavourites();
-//            viewModel.favourites().observe(this, favs -> {
-//                for (String title : favs.getFavourites()) {
-//                    if (randomPoem.getTitle().equals(title)) {
-//                        poemBinding.favsToggler.setChecked(true);
-//                    } else {
-//                        poemBinding.favsToggler.setChecked(false);
-//
-//                    }
-//                }
-//            });
-            viewModel.addToRoomDB(randomPoem);
-//            poemBinding.addToRoomdb.setOnClickListener(v ->
-//                    viewModel.getPoemByTitle(randomPoem.getTitle()));
+//          check if current Poem has been faved before
+            viewModel.getFavourites();
+            viewModel.favourites().observe(this, favs -> {
+                for (String title : favs.getFavourites()) {
+                    if (randomPoem.getTitle().equals(title)) {
+                        poemBinding.favsToggler.setChecked(true);
+                    } else {
+                        poemBinding.favsToggler.setChecked(false);
+                    }
+                }
+            });
+
         });
 
         poemBinding.favsToggler.setOnCheckedChangeListener(
@@ -93,6 +89,8 @@ public class RandomFragment extends Fragment {
                     manageToggleDrawableState(isChecked);
                     if (isChecked) {
                         viewModel.addToFavourites(currentPoemModel.getTitle());
+                    } else {
+                        viewModel.removeFavourite(currentPoemModel.getTitle());
                     }
                 }
         );
