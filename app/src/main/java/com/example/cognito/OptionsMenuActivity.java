@@ -4,14 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.cognito.databinding.FragmentAboutBinding;
 import com.example.cognito.service.AboutFragment;
 
 public class OptionsMenuActivity extends AppCompatActivity {

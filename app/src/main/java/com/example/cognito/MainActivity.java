@@ -2,14 +2,8 @@ package com.example.cognito;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
 import com.example.cognito.databinding.ActivityMainBinding;
-import com.example.cognito.login.CognitoSettings;
 import com.example.cognito.login.SignInActivity;
 import com.example.cognito.login.SignUpActivity;
 
@@ -23,8 +17,8 @@ public class MainActivity extends OptionsMenuActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.appbar.toolBar.setTitle(R.string.app_bar_title);
-        setSupportActionBar(binding.appbar.toolBar);
+//        binding.appbar.toolBar.setTitle(R.string.app_bar_title);
+//        setSupportActionBar(binding.appbar.toolBar);
 
         binding.buttonMainLogin.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);

@@ -17,7 +17,6 @@ import com.example.cognito.MainViewModel;
 import com.example.cognito.OnClickedListener;
 import com.example.cognito.R;
 import com.example.cognito.databinding.FragmentFavouritesBinding;
-import com.example.cognito.model.Favourites;
 
 import timber.log.Timber;
 

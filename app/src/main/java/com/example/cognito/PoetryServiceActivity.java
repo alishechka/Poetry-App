@@ -2,7 +2,6 @@ package com.example.cognito;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.cognito.databinding.ActivityPoetryServiceBinding;
@@ -41,7 +40,8 @@ public class PoetryServiceActivity extends OptionsMenuActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.nav_random:
-                        swapFragment(randomFragment, item.getItemId(), RANDOM_FRAGMENT);
+//                        swapFragment(randomFragment, item.getItemId(), RANDOM_FRAGMENT);
+                        selectedFragment = randomFragment;
                         break;
                     case R.id.nav_favourites:
                         selectedFragment = new FavouriteFragment();
