@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.cognito"
+        applicationId "com.boss.cognito"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
@@ -57,6 +57,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
 
     //bottom navigation
+    //noinspection GradleCompatible
     implementation 'com.android.support:design:28.1.0'
     implementation 'com.google.android.material:material:1.2.1'
 

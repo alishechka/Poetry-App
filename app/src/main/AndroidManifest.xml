@@ -6,22 +6,22 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.example.cognito.App"
+        android:name="com.boss.cognito.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.cognito.OptionsMenuActivity"></activity>
+        <activity android:name="com.boss.cognito.OptionsMenuActivity"></activity>
         <activity
-            android:name="com.example.cognito.PoetryServiceActivity"
+            android:name="com.boss.cognito.PoetryServiceActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.example.cognito.login.LogoutActivity" />
-        <activity android:name="com.example.cognito.login.SignInActivity" />
-        <activity android:name="com.example.cognito.login.ValidateActivity" />
-        <activity android:name="com.example.cognito.login.SignUpActivity" />
-        <activity android:name="com.example.cognito.MainActivity">
+        <activity android:name="com.boss.cognito.login.LogoutActivity" />
+        <activity android:name="com.boss.cognito.login.SignInActivity" />
+        <activity android:name="com.boss.cognito.login.ValidateActivity" />
+        <activity android:name="com.boss.cognito.login.SignUpActivity" />
+        <activity android:name="com.boss.cognito.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
