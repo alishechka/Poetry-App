@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.boss.poetrydb2.login.ValidateActivity">
+    tools:context="com.boss.poetrydb.login.ValidateActivity">
 <!--    <Button-->
 <!--        app:layout_constraintTop_toTopOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->

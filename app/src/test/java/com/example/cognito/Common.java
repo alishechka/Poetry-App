@@ -1,6 +1,6 @@
 package com.example.cognito;
 
-import com.boss.poetrydb2.model.PoemModel;
+import com.boss.poetrydb.model.PoemModel;
 
 import java.util.ArrayList;
 import java.util.List;

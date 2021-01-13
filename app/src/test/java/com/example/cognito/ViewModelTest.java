@@ -3,9 +3,9 @@ package com.example.cognito;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 
-import com.boss.poetrydb2.MainViewModel;
-import com.boss.cognito.model.PoemModel;
-import com.boss.poetrydb2.repo.Repository;
+import com.boss.poetrydb.MainViewModel;
+import com.boss.poetrydb.model.PoemModel;
+import com.boss.poetrydb.repo.Repository;
 
 import org.junit.Before;
 import org.junit.Rule;
